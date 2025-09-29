@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE KAJOOR SQUARE CO. | Exclusive Premium Dates</title>
+    <!-- Load Inter Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // =======================================================
+        // 🔑 EDITABLE CONTENT CONFIGURATION (START)
+        // This is the ONLY section you need to edit to change content.
+        // =======================================================
+        const config = {
+            brand: {
+                name: "THE KAJOOR SQUARE CO.",
+                gold_part: "THE KAJOOR",
+                black_part: "SQUARE CO.",
+                established_year: "2012",
+                address:  { 
+                    text: "31 Dunrobin Crecent, Durban, South Africa", 
+                    href: "https://maps.app.goo.gl/CG5K6uD8TDtB5QZ78" 
+                }
+            },
+            hero: {
+                title: "THE GOLD STANDARD",
+                subtitle: "An unbroken lineage of pure indulgence.",
+                cta_text: "Discover The Collection"
+            },
+            products: [
+                // === To add a new listing, just add a new object here! ===
+                {
+                    id: 1,
+                    name: "Majestic Medjool",
+                    price: "R49.99 / Box",
+                    description: "The crown jewel of dates. Possessing a deep, intense sweetness, velvety texture, and lingering notes of dark caramel and cocoa.",
+                    image_url: "https://www.secretosdelsur.com/wp-content/uploads/2024/05/dates.jpg"
+                },
+                {
+                    id: 2,
+                    name: "Amber Delight",
+                    price: "R39.99 / Box",
+                    description: "A luminous, semi-dry treasure. Offering subtle notes of toasted almond and wildflower honey, with a perfectly firm finish.",
+                    image_url: "https://cleangreensimple.com/wp-content/uploads/guide-to-dried-dates.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Golden Crunch",
+                    price: "R59.99 / Box",
+                    description: "A rare, exquisite treat. Harvested early for its unique, texture and a fresh, complex flavour reminiscent of spiced pear and aged butterscotch.",
+                    image_url: "https://img.lb.wbmdstatic.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/SEEDs/1800x1200-medjool-dates-are-there-health-benefits-seed.jpg?resize=750px:*&output-quality=75"
+                },
+                {
+                    id: 4,
+                    name: "Royal Khalas",
+                    price: "R35.00 / Box",
+                    description: "A popular choice known for its tender texture and mild, butterscotch flavor. A perfect daily indulgence.",
+                    image_url: "https://theveganatlas.com/wp-content/uploads/2022/03/Dried-dates-in-a-wooden-bowl.jpg"
+                }
+
+            ],
+            story: {
+                heading_gold: "LEGACY",
+                heading_black: "THE ARABIAN ",
+                paragraph1: "For generations, THE KAJOOR SQUARE CO. has upheld a tradition of selecting only the finest, hand-picked dates. Our commitment ensures every piece delivers a moment of pure, uncompromised excellence. We cultivate not just fruit, but a tradition of luxury.",
+                paragraph2: "We partner exclusively with heritage orchards that practice sustainable, time-honored farming methods. This dedication to quality over volume is what truly sets our golden standard apart."
+            },
+            signup: {
+                heading: "Join Our Private Client List",
+                subtitle: "Access early harvest notifications, and limited-edition product releases reserved only for our most valued clients.",
+                placeholder: "Your Exclusive WhatsApp Number (+27...)",
+                button_text: "Join Now"
+            },
+            footer: {
+                shop: [
+                    { text: "Full Collection", href: "#collection" },
+                    { text: "Gifting Solutions", href: "#" },
+                    { text: "Wholesale Inquiry", href: "mailto:inquiry@kajoorsquare.co" } 
+                ],
+                support: [
+                    { text: "FAQ", href: "#" },
+                    { text: "Shipping & Returns", href: "#" },
+                    { text: "Call", href:"tel:+27728226614"} 
+                ],
+                social: [
+                    { 
+                        // Inline SVG for WhatsApp (Message Bubble)
+                        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4l1 3 3-3h6a2 2 0 0 0 2-2z"></path></svg>', 
+                        href: "https://wa.me/27728226614?text=I%20have%20an%20inquiry%20about%20your%20premium%20dates." 
+                    },
+                    { 
+                        // Inline SVG for Instagram
+                        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>', 
+                        href: "https://www.instagram.com/thekajoor_square_dates/" 
+                    },
+                    { icon: "", href: "#" }  // Placeholder remains for a third link
+                ]
+            }
+        };
+        // =======================================================
+        // 🔑 EDITABLE CONTENT CONFIGURATION (END)
+        // =======================================================
+
+
+        // Customizing Tailwind to include our brand colors and fonts
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'date-gold': '#DAA520', 
+                        'date-black': '#1E1E1E', 
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], 
+                        display: ['Playfair Display', 'serif'], 
+                    },
+                }
+            }
+        };
+
+        // Function to dynamically insert content from the config object
+        function renderContent() {
+            // Helper function for rendering list links
+            function renderListLinks(containerId, links) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                container.innerHTML = links.map(link => 
+                    `<li><a href="${link.href}" class="hover:text-date-gold transition">${link.text}</a></li>`
+                ).join('');
+            }
+
+            // Helper function for rendering social links (Adjusted for SVG and clean hover state)
+            function renderSocialLinks(containerId, links) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                container.innerHTML = links.map(link => 
+                    `<a href="${link.href}" target="_blank" class="text-date-gold hover:text-white transition duration-300 p-2 rounded-full hover:bg-date-gold/20 flex items-center justify-center">
+                        ${link.icon}
+                    </a>`
+                ).join('');
+            }
+            
+            // 1. Update Header Logo
+            const brandLogo = document.getElementById('brand-logo');
+            if (brandLogo) {
+                brandLogo.innerHTML = `<span class="text-date-gold">${config.brand.gold_part}</span> ${config.brand.black_part}`;
+            }
+
+            // 2. Update Hero Section
+            document.getElementById('hero-title').textContent = config.hero.title;
+            document.getElementById('hero-subtitle').textContent = config.hero.subtitle;
+            document.getElementById('hero-cta').textContent = config.hero.cta_text;
+
+            // 3. Dynamic Product Cards Rendering
+            const productGrid = document.getElementById('product-grid'); 
+            if (productGrid) {
+                // Generate HTML for all products based on the config array
+                productGrid.innerHTML = config.products.map(product => {
+                    return `
+                        <div id="product-card-${product.id}" class="date-card bg-white rounded-xl overflow-hidden shadow-2xl shadow-date-gold/10 transition duration-300 hover:shadow-date-gold/30 group">
+                            <div class="overflow-hidden">
+                                <!-- Image source and fallback are set directly in the generated HTML -->
+                                <img 
+                                    class="date-img w-full h-72 object-cover object-center" 
+                                    src="${product.image_url}" 
+                                    alt="${product.name} Dates"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/400x288/EBEBEB/DAA520?text=Date+Image';"
+                                >
+                            </div>
+                            <div class="p-6 text-center">
+                                <h3 class="product-name font-display text-3xl font-bold text-date-black mb-2">${product.name}</h3>
+                                <p class="product-price text-date-gold text-xl font-semibold mb-4">${product.price}</p>
+                                <p class="product-description text-gray-600 mb-6">${product.description}</p>
+                                <button class="w-full py-3 bg-date-black text-white rounded-full font-semibold transition duration-300 transform group-hover:bg-date-gold group-hover:scale-[1.02]">
+                                    View Details
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+
+            // 4. Update Story Section
+            document.getElementById('story-heading-gold').textContent = config.story.heading_gold;
+            document.getElementById('story-heading-black').textContent = config.story.heading_black;
+            document.getElementById('story-p1').textContent = config.story.paragraph1;
+            document.getElementById('story-p2').textContent = config.story.paragraph2;
+
+            // 5. Update Signup Section
+            document.getElementById('signup-heading').textContent = config.signup.heading;
+            document.getElementById('signup-subtitle').textContent = config.signup.subtitle;
+            document.getElementById('signup-input').placeholder = config.signup.placeholder;
+            document.getElementById('signup-button').textContent = config.signup.button_text;
+
+            // 6. WhatsApp Integration Logic 
+            const signupButton = document.getElementById('signup-button');
+            const signupInput = document.getElementById('signup-input');
+
+            signupButton.onclick = function(e) {
+                e.preventDefault(); 
+                const phoneNumber = signupInput.value.replace(/[^0-9+]/g, ''); // Clean the input: keep only digits and '+'
+                
+                // Example pre-filled message (WhatsApp requires message to be URL-encoded)
+                const prefilledMessage = encodeURIComponent("Hello, I'm interested in receiving early harvest notifications and exclusive offers from THE KAJOOR SQUARE CO.");
+                
+                if (phoneNumber.length > 5) { // Basic validation
+                    const whatsappLink = `https://wa.me/${phoneNumber}?text=${prefilledMessage}`;
+                    window.open(whatsappLink, '_blank');
+                } else {
+                    // Show visual feedback instead of using alert()
+                    signupInput.value = ''; // Clear previous input
+                    signupInput.placeholder = "Please enter a valid number (e.g., +2772...)";
+                    signupInput.classList.add('border-red-500', 'animate-pulse');
+                    
+                    setTimeout(() => {
+                        signupInput.placeholder = config.signup.placeholder;
+                        signupInput.classList.remove('border-red-500', 'animate-pulse');
+                    }, 3000);
+                }
+            };
+
+            // 7. Update Static Footer Content
+            document.getElementById('footer-brand-name').textContent = config.brand.name;
+            document.getElementById('footer-established').textContent = `Distributers of the Finest Dates since ${config.brand.established_year}.`;
+            
+            const footerAddress = document.getElementById('footer-address');
+            if (typeof config.brand.address === 'object' && config.brand.address !== null && config.brand.address.href) {
+                footerAddress.innerHTML = `
+                    <a href="${config.brand.address.href}" target="_blank" class="hover:text-date-gold transition duration-200">
+                        ${config.brand.address.text}
+                    </a>
+                `;
+            } else if (config.brand.address.text) {
+                footerAddress.textContent = config.brand.address.text;
+            } else {
+                footerAddress.textContent = config.brand.address;
+            }
+
+
+            document.getElementById('footer-copyright').textContent = `© 2025 ${config.brand.name} All Rights Reserved.`;
+
+            // 8. Update Footer Links
+            renderListLinks('footer-shop-links', config.footer.shop);
+            renderListLinks('footer-support-links', config.footer.support);
+            renderSocialLinks('footer-social-links', config.footer.social);
+        }
+
+        // Run the content rendering function once the window loads
+        window.onload = renderContent;
+
+    </script>
+    <style>
+        /* Custom CSS for the Golden Glow effect on the title in the Hero */
+        @keyframes goldGlow {
+            0% {
+                text-shadow: 0 0 5px #DAA520, 0 0 10px rgba(218, 165, 32, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 15px #DAA520, 0 0 30px rgba(218, 165, 32, 0.8);
+            }
+            100% {
+                text-shadow: 0 0 5px #DAA520, 0 0 10px rgba(218, 165, 32, 0.5);
+            }
+        }
+
+        /* Apply the animation class */
+        .animate-gold-glow {
+            animation: goldGlow 3s infinite alternate;
+        }
+
+        /* Product Card Image Hover Effect */
+        .date-card:hover .date-img {
+            transform: scale(1.05);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Smooth cubic transition */
+        }
+
+        /* Base image style with subtle gold shadow */
+        .date-img {
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            box-shadow: 0 10px 30px -5px rgba(218, 165, 32, 0.15); 
+        }
+
+        /* Scroll Bar Styling (Subtle Gold) */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #DAA520;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #a8860c;
+        }
+        
+        /* Marquee CSS */
+        .marquee {
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% {
+                transform: translate3d(0, 0, 0);
+            }
+            100% {
+                /* Move the text exactly half of its width (since the content is doubled) */
+                transform: translate3d(-50%, 0, 0);
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-date-black font-sans antialiased">
+
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo/Brand Name -->
+            <a href="#" class="text-3xl font-display font-bold text-date-black tracking-wider" id="brand-logo">
+                <!-- Content injected by JavaScript -->
+            </a>
+            
+            <!-- Navigation -->
+            <nav class="hidden md:flex space-x-8 text-lg font-medium">
+                <a href="#collection" class="text-date-black hover:text-date-gold transition duration-200">Collection</a>
+                <a href="#story" class="text-date-black hover:text-date-gold transition duration-200">Our Story</a>
+                <a href="#contact" class="text-date-black hover:text-date-gold transition duration-200">Contact</a>
+            </nav>
+            
+            <!-- Hidden element to maintain flex-space if cart button was present -->
+            <div class="w-12"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b-4 border-date-gold/50">
+            <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Dates005.jpg/1200px-Dates005.jpg');"></div>
+            
+            <div class="z-10 text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl border border-date-gold/50">
+                <h1 id="hero-title" class="font-display text-7xl md:text-8xl lg:text-9xl font-extrabold text-date-black mb-4 uppercase tracking-tighter animate-gold-glow">
+                    <!-- Content injected by JavaScript -->
+                </h1>
+                <p id="hero-subtitle" class="text-xl md:text-2xl text-date-black mb-8 max-w-2xl mx-auto">
+                    <!-- Content injected by JavaScript -->
+                </p>
+                <!-- Animated CTA Button -->
+                <a href="#collection" id="hero-cta" class="inline-block px-12 py-4 bg-date-gold text-white text-xl font-bold rounded-full shadow-2xl shadow-date-gold/50 hover:bg-date-black transition duration-300 transform hover:scale-105 hover:shadow-date-gold/70">
+                    <!-- Content injected by JavaScript -->
+                </a>
+            </div>
+        </section>
+
+        <!-- Product Collection Section -->
+        <section id="collection" class="py-20 md:py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <h2 class="font-display text-5xl font-bold text-center mb-16 text-date-black">
+                The <span class="text-date-gold">Exclusive</span> Collection
+            </h2>
+
+            <!-- Product cards are generated here dynamically from the config.products array -->
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10">
+                <!-- Content injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Our Story / Exclusivity Section -->
+        <section id="story" class="py-20 md:py-32 bg-date-black/5">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
+                
+                <!-- Image Placeholder: Updated to use real URL -->
+                <div class="lg:w-1/2">
+                    <img 
+                        class="w-full h-auto rounded-xl shadow-2xl border-4 border-date-gold p-2" 
+                        src="https://t4.ftcdn.net/jpg/06/20/63/09/360_F_620630996_WpLip8bYuPVVCbkK2UVUl8gSehbtXiHd.jpg" 
+                        alt="A photo of a heritage date orchard at sunset"
+                    >
+                </div>
+
+                <!-- Text Content -->
+                <div class="lg:w-1/2 text-date-black">
+                    <p class="text-sm font-semibold uppercase tracking-widest text-date-gold mb-3">Our Heritage</p>
+                    <h2 class="font-display text-5xl font-bold mb-6">
+                        <span id="story-heading-black"><!-- Content injected by JavaScript --></span><span class="text-date-gold" id="story-heading-gold"><!-- Content injected by JavaScript --></span>
+                    </h2>
+                    <p id="story-p1" class="text-lg mb-4 leading-relaxed">
+                        <!-- Content injected by JavaScript -->
+                    </p>
+                    <p id="story-p2" class="text-lg mb-8 leading-relaxed font-semibold">
+
+        </section>
+
+        <!-- Animated Feature Bar (Exciting Animation) -->
+        <div class="bg-date-gold text-date-black py-4 overflow-hidden border-t-4 border-b-4 border-date-black">
+            <div class="marquee whitespace-nowrap">
+                <p class="inline-block text-2xl font-bold uppercase tracking-widest">
+                    &star; LIMITED STOCKS &star; Hand-Picked &star; TASTE THE GOLD STANDARD &star; LIMITED STOCKS &star; Hand-Picked &star; LIMITED STOCKS &star; TASTE THE GOLD STANDARD &star;
+                </p>
+            </div>
+        </div>
+
+        <!-- Contact/Sign Up Section (Now for WhatsApp) -->
+        <section id="contact" class="py-20 max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <h2 class="font-display text-4xl font-bold mb-4">
+                <span id="signup-heading"><!-- Content injected by JavaScript --></span>
+            </h2>
+            <p id="signup-subtitle" class="text-lg text-gray-600 mb-8">
+                <!-- Content injected by JavaScript -->
+            </p>
+            <!-- Form element for potential future submission handling, though current logic is JS-based -->
+            <form class="flex flex-col sm:flex-row gap-4 max-w-lg mx-auto">
+                <input 
+                    type="tel" 
+                    id="signup-input"
+                    placeholder="" 
+                    class="flex-grow p-3 border-2 border-date-gold rounded-xl focus:ring-date-gold focus:border-date-gold text-date-black placeholder-gray-500 shadow-inner transition duration-300"
+                />
+                <button 
+                    id="signup-button" 
+                    type="submit" 
+                    class="px-8 py-3 bg-date-gold text-white font-bold rounded-xl shadow-xl shadow-date-gold/50 transition duration-300 hover:bg-date-black transform hover:scale-[1.02] active:scale-95"
+                >
+                    <!-- Content injected by JavaScript -->
+                </button>
+            </form>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-date-black text-white py-12 border-t-4 border-date-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                
+                <!-- Brand Info -->
+                <div>
+                    <h3 id="footer-brand-name" class="font-display text-2xl font-bold text-date-gold mb-4"><!-- Content injected by JavaScript --></h3>
+                    <p id="footer-established" class="text-gray-400 text-sm mb-2">Distributers of the Finest Dates since 2012.</p>
+                    <p id="footer-address" class="text-gray-400 text-sm"><!-- Content injected by JavaScript --></p>
+                </div>
+
+                <!-- Links - Shop -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Shop</h4>
+                    <ul id="footer-shop-links" class="space-y-2 text-sm text-gray-400">
+                        <!-- Links dynamically generated by JS -->
+                    </ul>
+                </div>
+
+                <!-- Links - Support -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Support</h4>
+                    <ul id="footer-support-links" class="space-y-2 text-sm text-gray-400">
+                        <!-- Links dynamically generated by JS -->
+                    </ul>
+                </div>
+                
+                <!-- Social -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Connect</h4>
+                    <div id="footer-social-links" class="flex space-x-4">
+                        <!-- Links dynamically generated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-gray-700 text-center">
+                <p id="footer-copyright" class="text-sm text-gray-500"><!-- Content injected by JavaScript --></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

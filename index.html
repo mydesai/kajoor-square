@@ -30,7 +30,7 @@
                 cta_text: "Discover The Collection"
             },
             products: [
-                // === To add a new listing, just add a new object here! ===
+                // === INDIVIDUAL PRODUCT LISTINGS ===
                 {
                     id: 1,
                     name: "Majestic Medjool",
@@ -61,6 +61,23 @@
                 }
 
             ],
+            // === NEW: GIFT BOX LISTINGS ===
+            gift_boxes: [
+                {
+                    id: 101,
+                    name: "The Executive Selection",
+                    price: "R299.00 / Gift Box",
+                    description: "Four varieties of our most sought-after dates, elegantly presented in a bespoke, matte black wooden casing with gold foil details. Perfect for corporate gifting.",
+                    image_url: "https://www.healthifyme.com/blog/wp-content/uploads/2021/08/dates-different-types.jpg"
+                },
+                {
+                    id: 102,
+                    name: "Artisan Trio",
+                    price: "R189.00 / Gift Box",
+                    description: "A hand-picked collection of Medjool, Khalas, and Amber Delight, packed in individual silk pouches inside a luxurious, magnetic-seal box. Ideal for friends and family.",
+                    image_url: "https://cdn.shopify.com/s/files/1/0593/6318/1484/files/Dates_Packs_New_ecomm_84_600x.jpg?v=1680106394"
+                }
+            ],
             story: {
                 heading_gold: "LEGACY",
                 heading_black: "THE ARABIAN ",
@@ -76,7 +93,7 @@
             footer: {
                 shop: [
                     { text: "Full Collection", href: "#collection" },
-                    { text: "Gifting Solutions", href: "#" },
+                    { text: "Gifting Solutions", href: "#gifting" }, // Updated link
                     { text: "Wholesale Inquiry", href: "mailto:inquiry@kajoorsquare.co" } 
                 ],
                 support: [
@@ -148,12 +165,31 @@
                 brandLogo.innerHTML = `<span class="text-date-gold">${config.brand.gold_part}</span> ${config.brand.black_part}`;
             }
 
-            // 2. Update Hero Section
+            // 2. Update Header Navigation Links (Desktop and Mobile)
+            const navLinks = `
+                <a href="#collection" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Collection</a>
+                <a href="#gifting" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Gifting</a>
+                <a href="#story" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Our Story</a>
+                <a href="#contact" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Contact</a>
+            `;
+            
+            const desktopNavContainer = document.getElementById('main-nav');
+            if (desktopNavContainer) {
+                desktopNavContainer.innerHTML = navLinks;
+            }
+            
+            const mobileNavContainer = document.getElementById('mobile-nav');
+            if (mobileNavContainer) {
+                mobileNavContainer.innerHTML = navLinks;
+            }
+
+
+            // 3. Update Hero Section
             document.getElementById('hero-title').textContent = config.hero.title;
             document.getElementById('hero-subtitle').textContent = config.hero.subtitle;
             document.getElementById('hero-cta').textContent = config.hero.cta_text;
 
-            // 3. Dynamic Product Cards Rendering
+            // 4. Dynamic Product Cards Rendering
             const productGrid = document.getElementById('product-grid'); 
             if (productGrid) {
                 // Generate HTML for all products based on the config array
@@ -181,21 +217,50 @@
                     `;
                 }).join('');
             }
+            
+            // 5. Dynamic Gift Box Rendering (NEW)
+            const giftBoxGrid = document.getElementById('gift-box-grid'); 
+            if (giftBoxGrid) {
+                // Generate HTML for all gift boxes
+                giftBoxGrid.innerHTML = config.gift_boxes.map(box => {
+                    return `
+                        <div id="gift-box-${box.id}" class="date-card bg-white rounded-xl overflow-hidden shadow-2xl shadow-date-black/10 transition duration-300 hover:shadow-date-gold/50 border-4 border-date-gold/0 hover:border-date-gold group">
+                            <div class="overflow-hidden">
+                                <!-- Image source and fallback -->
+                                <img 
+                                    class="date-img w-full h-80 object-cover object-center" 
+                                    src="${box.image_url}" 
+                                    alt="${box.name} Gift Box"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/1E1E1E/DAA520?text=Gift+Box+Image';"
+                                >
+                            </div>
+                            <div class="p-8 text-left">
+                                <h3 class="product-name font-display text-4xl font-extrabold text-date-black mb-2">${box.name}</h3>
+                                <p class="product-price text-date-gold text-2xl font-semibold mb-4">${box.price}</p>
+                                <p class="product-description text-gray-700 mb-6 leading-relaxed">${box.description}</p>
+                                <button class="w-full py-3 bg-date-gold text-white rounded-full font-semibold transition duration-300 transform group-hover:bg-date-black group-hover:scale-[1.02] shadow-lg">
+                                    Send a Gift
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
 
 
-            // 4. Update Story Section
+            // 6. Update Story Section
             document.getElementById('story-heading-gold').textContent = config.story.heading_gold;
             document.getElementById('story-heading-black').textContent = config.story.heading_black;
             document.getElementById('story-p1').textContent = config.story.paragraph1;
             document.getElementById('story-p2').textContent = config.story.paragraph2;
 
-            // 5. Update Signup Section
+            // 7. Update Signup Section
             document.getElementById('signup-heading').textContent = config.signup.heading;
             document.getElementById('signup-subtitle').textContent = config.signup.subtitle;
             document.getElementById('signup-input').placeholder = config.signup.placeholder;
             document.getElementById('signup-button').textContent = config.signup.button_text;
 
-            // 6. WhatsApp Integration Logic 
+            // 8. WhatsApp Integration Logic 
             const signupButton = document.getElementById('signup-button');
             const signupInput = document.getElementById('signup-input');
 
@@ -222,7 +287,7 @@
                 }
             };
 
-            // 7. Update Static Footer Content
+            // 9. Update Static Footer Content
             document.getElementById('footer-brand-name').textContent = config.brand.name;
             document.getElementById('footer-established').textContent = `Distributers of the Finest Dates since ${config.brand.established_year}.`;
             
@@ -242,14 +307,33 @@
 
             document.getElementById('footer-copyright').textContent = `© 2025 ${config.brand.name} All Rights Reserved.`;
 
-            // 8. Update Footer Links
+            // 10. Update Footer Links
             renderListLinks('footer-shop-links', config.footer.shop);
             renderListLinks('footer-support-links', config.footer.support);
             renderSocialLinks('footer-social-links', config.footer.social);
         }
 
-        // Run the content rendering function once the window loads
-        window.onload = renderContent;
+        // === Mobile Menu Logic ===
+        function openMobileMenu() {
+            document.getElementById('mobile-menu').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden'); // Prevent scrolling body when menu is open
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function setupMobileMenu() {
+            document.getElementById('menu-button').onclick = openMobileMenu;
+            document.getElementById('close-menu-button').onclick = closeMobileMenu;
+        }
+
+        // Run the content rendering function and menu setup once the window loads
+        window.onload = function() {
+            renderContent();
+            setupMobileMenu();
+        };
 
     </script>
     <style>
@@ -311,27 +395,56 @@
                 transform: translate3d(-50%, 0, 0);
             }
         }
+
+        /* Mobile Menu Transitions (Optional for smoother feel) */
+        .mobile-menu-overlay {
+            transition: transform 0.3s ease-in-out;
+            transform: translateX(0);
+        }
+        .mobile-menu-overlay.hidden {
+            transform: translateX(100%);
+        }
     </style>
 </head>
 <body class="bg-white text-date-black font-sans antialiased">
 
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-date-black/95 backdrop-blur-md">
+        <div class="flex flex-col h-full items-center justify-center space-y-8">
+            <button id="close-menu-button" class="absolute top-6 right-6 text-date-gold hover:text-white transition">
+                <!-- Close Icon (X) -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <nav id="mobile-nav" class="flex flex-col space-y-6 text-3xl font-display font-bold text-white text-center">
+                <!-- Mobile Links dynamically updated in JS renderContent() step 2 -->
+            </nav>
+            <a href="#" class="text-lg font-bold text-date-gold mt-10 hover:text-white transition" id="brand-logo-mobile">
+                <span class="text-date-gold">${config.brand.gold_part}</span> ${config.brand.black_part}
+            </a>
+        </div>
+    </div>
+    
     <!-- Header & Navigation -->
-    <header class="sticky top-0 z-50 bg-white/95 backdrop-blur-sm shadow-lg">
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- Logo/Brand Name -->
             <a href="#" class="text-3xl font-display font-bold text-date-black tracking-wider" id="brand-logo">
                 <!-- Content injected by JavaScript -->
             </a>
             
-            <!-- Navigation -->
-            <nav class="hidden md:flex space-x-8 text-lg font-medium">
-                <a href="#collection" class="text-date-black hover:text-date-gold transition duration-200">Collection</a>
-                <a href="#story" class="text-date-black hover:text-date-gold transition duration-200">Our Story</a>
-                <a href="#contact" class="text-date-black hover:text-date-gold transition duration-200">Contact</a>
+            <!-- Desktop Navigation -->
+            <nav id="main-nav" class="hidden md:flex space-x-8 text-lg font-medium">
+                <!-- Links dynamically updated in JS renderContent() step 2 -->
             </nav>
+
+            <!-- Mobile Menu Button (Hamburger) -->
+            <button id="menu-button" class="md:hidden text-date-black p-2 rounded-lg hover:bg-date-black/10 transition">
+                <!-- Hamburger Icon -->
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
             
-            <!-- Hidden element to maintain flex-space if cart button was present -->
-            <div class="w-12"></div>
+            <!-- Hidden element to maintain flex-space on desktop -->
+            <div class="hidden md:block w-12"></div>
         </div>
     </header>
 
@@ -340,15 +453,15 @@
         <section class="relative h-[80vh] flex items-center justify-center overflow-hidden border-b-4 border-date-gold/50">
             <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/4/45/Dates005.jpg/1200px-Dates005.jpg');"></div>
             
-            <div class="z-10 text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl border border-date-gold/50">
-                <h1 id="hero-title" class="font-display text-7xl md:text-8xl lg:text-9xl font-extrabold text-date-black mb-4 uppercase tracking-tighter animate-gold-glow">
-                    <!-- Content injected by JavaScript -->
+            <div class="z-10 text-center p-6 bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl border border-date-gold/50 mx-4">
+                <h1 id="hero-title" class="font-display text-5xl sm:text-7xl md:text-8xl lg:text-9xl font-extrabold text-date-black mb-4 uppercase tracking-tighter animate-gold-glow">
+                    <!-- Content injected by JavaScript: Scaled down for mobile -->
                 </h1>
-                <p id="hero-subtitle" class="text-xl md:text-2xl text-date-black mb-8 max-w-2xl mx-auto">
+                <p id="hero-subtitle" class="text-lg md:text-2xl text-date-black mb-8 max-w-2xl mx-auto">
                     <!-- Content injected by JavaScript -->
                 </p>
                 <!-- Animated CTA Button -->
-                <a href="#collection" id="hero-cta" class="inline-block px-12 py-4 bg-date-gold text-white text-xl font-bold rounded-full shadow-2xl shadow-date-gold/50 hover:bg-date-black transition duration-300 transform hover:scale-105 hover:shadow-date-gold/70">
+                <a href="#collection" id="hero-cta" class="inline-block px-10 py-3 md:px-12 md:py-4 bg-date-gold text-white text-lg md:text-xl font-bold rounded-full shadow-2xl shadow-date-gold/50 hover:bg-date-black transition duration-300 transform hover:scale-105 hover:shadow-date-gold/70">
                     <!-- Content injected by JavaScript -->
                 </a>
             </div>
@@ -356,19 +469,35 @@
 
         <!-- Product Collection Section -->
         <section id="collection" class="py-20 md:py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <h2 class="font-display text-5xl font-bold text-center mb-16 text-date-black">
+            <h2 class="font-display text-4xl sm:text-5xl font-bold text-center mb-16 text-date-black">
                 The <span class="text-date-gold">Exclusive</span> Collection
             </h2>
 
             <!-- Product cards are generated here dynamically from the config.products array -->
-            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-10">
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
                 <!-- Content injected by JavaScript -->
             </div>
         </section>
 
+        <!-- NEW: Gift Box Section -->
+        <section id="gifting" class="py-20 md:py-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-date-black/5">
+            <h2 class="font-display text-4xl sm:text-5xl font-bold text-center mb-4 text-date-black">
+                The Art of <span class="text-date-gold">Gifting</span>
+            </h2>
+            <p class="text-center text-lg sm:text-xl text-gray-700 mb-16 max-w-3xl mx-auto">
+                Elevate any occasion with a box of unparalleled quality. Curated for the connoisseur.
+            </p>
+
+            <!-- Gift Box Grid - 2 columns -->
+            <div id="gift-box-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
+                <!-- Gift Box content dynamically injected by JS renderContent() step 5 -->
+            </div>
+        </section>
+
+
         <!-- Our Story / Exclusivity Section -->
-        <section id="story" class="py-20 md:py-32 bg-date-black/5">
-            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-12">
+        <section id="story" class="py-20 md:py-32 bg-date-black/10">
+            <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col lg:flex-row items-center gap-10 lg:gap-12">
                 
                 <!-- Image Placeholder: Updated to use real URL -->
                 <div class="lg:w-1/2">
@@ -382,20 +511,27 @@
                 <!-- Text Content -->
                 <div class="lg:w-1/2 text-date-black">
                     <p class="text-sm font-semibold uppercase tracking-widest text-date-gold mb-3">Our Heritage</p>
-                    <h2 class="font-display text-5xl font-bold mb-6">
+                    <h2 class="font-display text-4xl sm:text-5xl font-bold mb-6">
                         <span id="story-heading-black"><!-- Content injected by JavaScript --></span><span class="text-date-gold" id="story-heading-gold"><!-- Content injected by JavaScript --></span>
                     </h2>
-                    <p id="story-p1" class="text-lg mb-4 leading-relaxed">
+                    <p id="story-p1" class="text-base md:text-lg mb-4 leading-relaxed">
                         <!-- Content injected by JavaScript -->
                     </p>
-                    <p id="story-p2" class="text-lg mb-8 leading-relaxed font-semibold">
-
+                    <p id="story-p2" class="text-base md:text-lg mb-8 leading-relaxed font-semibold">
+                        <!-- Content injected by JavaScript -->
+                    </p>
+                    <button class="px-8 py-3 border-2 border-date-gold bg-date-black text-white font-semibold rounded-full hover:bg-date-gold hover:border-date-black transition duration-300 transform hover:shadow-lg hover:shadow-date-gold/50">
+                        Read Our Full Manifesto
+                    </button>
+                </div>
+            </div>
         </section>
 
         <!-- Animated Feature Bar (Exciting Animation) -->
         <div class="bg-date-gold text-date-black py-4 overflow-hidden border-t-4 border-b-4 border-date-black">
             <div class="marquee whitespace-nowrap">
-                <p class="inline-block text-2xl font-bold uppercase tracking-widest">
+                <!-- Scaled down text for mobile: text-xl on mobile, text-2xl otherwise -->
+                <p class="inline-block text-xl md:text-2xl font-bold uppercase tracking-widest">
                     &star; LIMITED STOCKS &star; Hand-Picked &star; TASTE THE GOLD STANDARD &star; LIMITED STOCKS &star; Hand-Picked &star; LIMITED STOCKS &star; TASTE THE GOLD STANDARD &star;
                 </p>
             </div>

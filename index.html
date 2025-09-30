@@ -54,7 +54,8 @@
                 shop: [
                     { text: "Full Collection", href: "collection.html" },
                     { text: "Gifting Solutions", href: "gifting.html" }, 
-                    { text: "Wholesale Inquiry", href: "bulk.html" } // New Bulk link
+                    { text: "Wholesale Inquiry", href: "bulk.html" },
+                    { text: "Our Story", href: "about.html" } // ADDED: Link to the new About Us page
                 ],
                 support: [
                     { text: "FAQ", href: "#" },
@@ -118,10 +119,11 @@
             }
 
             // 2. Update Header Navigation Links (Desktop and Mobile)
-            // Links now point to dedicated pages or sections
+            // ADDED: Our Story link
             const navLinks = `
                 <a href="collection.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Collection</a>
                 <a href="gifting.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Gifting</a>
+                <a href="about.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Our Story</a>
                 <a href="bulk.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Bulk & Wholesale</a>
                 <a href="#contact" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Contact</a>
             `;
@@ -316,7 +318,7 @@
             </a>
         </section>
         
-        <!-- NEW: Gifting Solutions Spotlight Section -->
+        <!-- Gifting Solutions Spotlight Section -->
         <section id="gifting-spotlight" class="py-20 bg-date-gold/10">
             <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 bg-white rounded-3xl shadow-2xl p-8 md:p-12 border-4 border-date-gold/50">
                 <div class="flex flex-col md:flex-row items-center justify-between text-center md:text-left gap-8">
@@ -350,6 +352,7 @@
                         class="w-full h-auto rounded-xl shadow-2xl border-4 border-date-gold p-2" 
                         src="https://t4.ftcdn.net/jpg/06/20/63/09/360_F_620630996_WpLip8bYuPVVCbkK2UVUl8gSehbtXiHd.jpg" 
                         alt="A photo of a heritage date orchard at sunset"
+                        onerror="this.onerror=null; this.src='https://placehold.co/600x400/1E1E1E/DAA520?text=Heritage+Orchard';"
                     >
                 </div>
 
@@ -364,9 +367,10 @@
                     <p id="story-p2" class="text-base md:text-lg mb-8 leading-relaxed font-semibold">
                         <!-- Content injected by JavaScript -->
                     </p>
-                    <button class="px-8 py-3 border-2 border-gold-400 bg-date-black text-white font-semibold rounded-full hover:bg-date-gold hover:border-date-black transition duration-300 transform hover:shadow-lg hover:shadow-date-gold/50">
+                    <!-- Updated button to link to the new About page -->
+                    <a href="about.html" class="px-8 py-3 border-2 border-gold-400 bg-date-black text-white font-semibold rounded-full hover:bg-date-gold hover:border-date-black transition duration-300 transform hover:shadow-lg hover:shadow-date-gold/50">
                         Read Our Full Manifesto
-                    </button>
+                    </a>
                 </div>
             </div>
         </section>

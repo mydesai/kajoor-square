@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE KAJOOR SQUARE CO. | Date Collection</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // =======================================================
+        // 🔑 EDITABLE CONTENT CONFIGURATION (START)
+        // Kept consistent across all files for easy management
+        // =======================================================
+        const config = {
+            brand: {
+                name: "THE KAJOOR SQUARE CO.",
+                gold_part: "THE KAJOOR",
+                black_part: "SQUARE CO.",
+                established_year: "2012",
+                address:  { 
+                    text: "31 Dunrobin Crecent, Durban, South Africa", 
+                    href: "https://maps.app.goo.gl/CG5K6uD8TDtB5QZ78" 
+                }
+            },
+            products: [
+                {
+                    id: 1,
+                    name: "Majestic Medjool",
+                    price: "R49.99 / Box",
+                    description: "The crown jewel of dates. Possessing a deep, intense sweetness, velvety texture, and lingering notes of dark caramel and cocoa. Sourced from the finest Moroccan groves.",
+                    image_url: "https://www.secretosdelsur.com/wp-content/uploads/2024/05/dates.jpg"
+                },
+                {
+                    id: 2,
+                    name: "Amber Delight",
+                    price: "R39.99 / Box",
+                    description: "A luminous, semi-dry treasure. Offering subtle notes of toasted almond and wildflower honey, with a perfectly firm finish. Excellent for baking.",
+                    image_url: "https://cleangreensimple.com/wp-content/uploads/guide-to-dried-dates.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Golden Crunch",
+                    price: "R59.99 / Box",
+                    description: "A rare, exquisite treat. Harvested early for its unique, texture and a fresh, complex flavour reminiscent of spiced pear and aged butterscotch. Limited annual yield.",
+                    image_url: "https://img.lb.wbmdstatic.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/SEEDs/1800x1200-medjool-dates-are-there-health-benefits-seed.jpg?resize=750px:*&output-quality=75"
+                },
+                {
+                    id: 4,
+                    name: "Royal Khalas",
+                    price: "R35.00 / Box",
+                    description: "A popular choice known for its tender texture and mild, butterscotch flavor. A perfect daily indulgence. High in fiber.",
+                    image_url: "https://theveganatlas.com/wp-content/uploads/2022/03/Dried-dates-in-a-wooden-bowl.jpg"
+                },
+                {
+                    id: 5,
+                    name: "Black Diamond Deglet Nour",
+                    price: "R45.00 / Box",
+                    description: "Known as the 'Date of Light,' these have a translucent golden color and a delicate, less sweet flavor compared to Medjool. Firm texture, great for savory dishes.",
+                    image_url: "https://hips.hearstapps.com/hmg-prod/images/dates-vs-prunes-1675276632.jpg"
+                }
+
+            ],
+            footer: {
+                shop: [
+                    { text: "Home", href: "index.html" },
+                    { text: "Full Collection", href: "collection.html" },
+                    { text: "Gifting Solutions", href: "gifting.html" }, 
+                    { text: "Wholesale Inquiry", href: "bulk.html" } 
+                ],
+                support: [
+                    { text: "FAQ", href: "#" },
+                    { text: "Shipping & Returns", href: "#" },
+                    { text: "Call", href:"tel:+27728226614"} 
+                ],
+                social: [
+                    { icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4l1 3 3-3h6a2 2 0 0 0 2-2z"></path></svg>', href: "https://wa.me/27728226614?text=I%20have%20an%20inquiry%20about%20your%20premium%20dates." },
+                    { icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>', href: "https://www.instagram.com/thekajoor_square_dates/" },
+                    { icon: "", href: "#" } 
+                ]
+            }
+        };
+        // =======================================================
+        // 🔑 EDITABLE CONTENT CONFIGURATION (END)
+        // =======================================================
+
+
+        // Customizing Tailwind to include our brand colors and fonts
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'date-gold': '#DAA520', 
+                        'date-black': '#1E1E1E', 
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'], 
+                        display: ['Playfair Display', 'serif'], 
+                    },
+                }
+            }
+        };
+
+        // --- Core Rendering Logic ---
+        function renderContent() {
+            // Helper function for rendering list links
+            function renderListLinks(containerId, links) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                container.innerHTML = links.map(link => 
+                    `<li><a href="${link.href}" class="hover:text-date-gold transition">${link.text}</a></li>`
+                ).join('');
+            }
+
+            // Helper function for rendering social links
+            function renderSocialLinks(containerId, links) {
+                const container = document.getElementById(containerId);
+                if (!container) return;
+                container.innerHTML = links.map(link => 
+                    `<a href="${link.href}" target="_blank" class="text-date-gold hover:text-white transition duration-300 p-2 rounded-full hover:bg-date-gold/20 flex items-center justify-center">
+                        ${link.icon}
+                    </a>`
+                ).join('');
+            }
+            
+            // 1. Update Header Logo
+            const brandLogo = document.getElementById('brand-logo');
+            if (brandLogo) {
+                brandLogo.innerHTML = `<span class="text-date-gold">${config.brand.gold_part}</span> ${config.brand.black_part}`;
+            }
+
+            // 2. Update Header Navigation Links (Desktop and Mobile)
+            const navLinks = `
+                <a href="collection.html" onclick="closeMobileMenu()" class="text-date-gold font-bold transition duration-200">Collection</a>
+                <a href="gifting.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Gifting</a>
+                <a href="bulk.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Bulk & Wholesale</a>
+                <a href="index.html#contact" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Contact</a>
+            `;
+            
+            document.getElementById('main-nav').innerHTML = navLinks;
+            document.getElementById('mobile-nav').innerHTML = navLinks;
+            
+            // 3. Dynamic Product Cards Rendering
+            const productGrid = document.getElementById('product-grid'); 
+            if (productGrid) {
+                productGrid.innerHTML = config.products.map(product => {
+                    return `
+                        <div id="product-card-${product.id}" class="date-card bg-white rounded-xl overflow-hidden shadow-2xl shadow-date-gold/10 transition duration-300 hover:shadow-date-gold/30 group">
+                            <div class="overflow-hidden">
+                                <img 
+                                    class="date-img w-full h-72 object-cover object-center" 
+                                    src="${product.image_url}" 
+                                    alt="${product.name} Dates"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/400x288/EBEBEB/DAA520?text=Date+Image';"
+                                >
+                            </div>
+                            <div class="p-6 text-center">
+                                <h3 class="product-name font-display text-3xl font-bold text-date-black mb-2">${product.name}</h3>
+                                <p class="product-price text-date-gold text-xl font-semibold mb-4">${product.price}</p>
+                                <p class="product-description text-gray-600 mb-6">${product.description}</p>
+                                <button class="w-full py-3 bg-date-black text-white rounded-full font-semibold transition duration-300 transform group-hover:bg-date-gold group-hover:scale-[1.02]">
+                                    Add to Basket
+                                </button>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            }
+
+
+            // 4. Update Footer Content and Links
+            document.getElementById('footer-brand-name').textContent = config.brand.name;
+            document.getElementById('footer-established').textContent = `Distributers of the Finest Dates since ${config.brand.established_year}.`;
+            
+            const footerAddress = document.getElementById('footer-address');
+            footerAddress.innerHTML = `<a href="${config.brand.address.href}" target="_blank" class="hover:text-date-gold transition duration-200">${config.brand.address.text}</a>`;
+
+            document.getElementById('footer-copyright').textContent = `© 2025 ${config.brand.name} All Rights Reserved.`;
+
+            renderListLinks('footer-shop-links', config.footer.shop);
+            renderListLinks('footer-support-links', config.footer.support);
+            renderSocialLinks('footer-social-links', config.footer.social);
+        }
+
+        // === Mobile Menu Logic ===
+        function openMobileMenu() {
+            document.getElementById('mobile-menu').classList.remove('hidden');
+            document.body.classList.add('overflow-hidden');
+        }
+
+        function closeMobileMenu() {
+            document.getElementById('mobile-menu').classList.add('hidden');
+            document.body.classList.remove('overflow-hidden');
+        }
+
+        function setupMobileMenu() {
+            document.getElementById('menu-button').onclick = openMobileMenu;
+            document.getElementById('close-menu-button').onclick = closeMobileMenu;
+        }
+
+        window.onload = function() {
+            renderContent();
+            setupMobileMenu();
+        };
+
+    </script>
+    <style>
+        /* Product Card Image Hover Effect */
+        .date-card:hover .date-img {
+            transform: scale(1.05);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .date-img {
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
+            box-shadow: 0 10px 30px -5px rgba(218, 165, 32, 0.15); 
+        }
+        /* Marquee CSS */
+        .marquee { animation: marquee 15s linear infinite; } /* Faster for specific page */
+        @keyframes marquee {
+            0% { transform: translate3d(0, 0, 0); }
+            100% { transform: translate3d(-50%, 0, 0); }
+        }
+    </style>
+</head>
+<body class="bg-white text-date-black font-sans antialiased">
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-date-black/95 backdrop-blur-md">
+        <div class="flex flex-col h-full items-center justify-center space-y-8">
+            <button id="close-menu-button" class="absolute top-6 right-6 text-date-gold hover:text-white transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+            </button>
+            <nav id="mobile-nav" class="flex flex-col space-y-6 text-3xl font-display font-bold text-white text-center">
+                <!-- Mobile Links dynamically updated in JS -->
+            </nav>
+            <a href="index.html" class="text-lg font-bold text-date-gold mt-10 hover:text-white transition" id="brand-logo-mobile">
+                <span class="text-date-gold">${config.brand.gold_part}</span> ${config.brand.black_part}
+            </a>
+        </div>
+    </div>
+    
+    <!-- Header & Navigation -->
+    <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            <!-- Logo/Brand Name -->
+            <a href="index.html" class="text-3xl font-display font-bold text-date-black tracking-wider" id="brand-logo">
+                <!-- Content injected by JavaScript -->
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <nav id="main-nav" class="hidden md:flex space-x-8 text-lg font-medium">
+                <!-- Links dynamically updated in JS -->
+            </nav>
+
+            <button id="menu-button" class="md:hidden text-date-black p-2 rounded-lg hover:bg-date-black/10 transition">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+            </button>
+            
+            <div class="hidden md:block w-12"></div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Product Collection Section -->
+        <section class="pt-16 pb-20 md:pt-24 md:pb-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                 <p class="text-xl font-semibold uppercase tracking-widest text-date-gold mb-3">Our Core Offering</p>
+                <h1 class="font-display text-5xl sm:text-6xl font-bold text-date-black mb-4">
+                    The <span class="text-date-gold">Full</span> Collection
+                </h1>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    A curated selection of the finest date varieties from around the world. Each box represents a distinct flavour, texture, and origin.
+                </p>
+            </div>
+
+            <!-- Product cards are generated here dynamically from the config.products array -->
+            <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                <!-- Content injected by JavaScript -->
+            </div>
+        </section>
+
+        <!-- Animated Feature Bar -->
+        <div class="bg-date-gold text-date-black py-4 overflow-hidden border-t-4 border-b-4 border-date-black">
+            <div class="marquee whitespace-nowrap">
+                <p class="inline-block text-lg md:text-2xl font-bold uppercase tracking-widest">
+                    &star; CERTIFIED PREMIUM &star; HAND-SORTED QUALITY &star; DIRECT FROM ORCHARD &star; CERTIFIED PREMIUM &star; HAND-SORTED QUALITY &star; DIRECT FROM ORCHARD &star;
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-date-black text-white py-12 border-t-4 border-date-gold">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                
+                <!-- Brand Info -->
+                <div>
+                    <h3 id="footer-brand-name" class="font-display text-2xl font-bold text-date-gold mb-4"><!-- Content injected by JavaScript --></h3>
+                    <p id="footer-established" class="text-gray-400 text-sm mb-2"><!-- Content injected by JavaScript --></p>
+                    <p id="footer-address" class="text-gray-400 text-sm"><!-- Content injected by JavaScript --></p>
+                </div>
+
+                <!-- Links - Shop -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Shop</h4>
+                    <ul id="footer-shop-links" class="space-y-2 text-sm text-gray-400">
+                        <!-- Links dynamically generated by JS -->
+                    </ul>
+                </div>
+
+                <!-- Links - Support -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Support</h4>
+                    <ul id="footer-support-links" class="space-y-2 text-sm text-gray-400">
+                        <!-- Links dynamically generated by JS -->
+                    </ul>
+                </div>
+                
+                <!-- Social -->
+                <div>
+                    <h4 class="text-lg font-semibold mb-3">Connect</h4>
+                    <div id="footer-social-links" class="flex space-x-4">
+                        <!-- Links dynamically generated by JS -->
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-10 pt-6 border-t border-gray-700 text-center">
+                <p id="footer-copyright" class="text-sm text-gray-500"><!-- Content injected by JavaScript --></p>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>

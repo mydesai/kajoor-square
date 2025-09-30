@@ -22,6 +22,31 @@
                     href: "https://maps.app.goo.gl/CG5K6uD8TDtB5QZ78" 
                 }
             },
+            products: [
+                // Include products for consistency, although they aren't the focus of this page
+                {
+                    id: 1,
+                    name: "Majestic Medjool",
+                    price: "R49.99 / Box",
+                    description: "The crown jewel of dates. Possessing a deep, intense sweetness, velvety texture, and lingering notes of dark caramel and cocoa. A truly royal treat.",
+                    image_url: "https://www.secretosdelsur.com/wp-content/uploads/2024/05/dates.jpg"
+                },
+                {
+                    id: 2,
+                    name: "Amber Delight",
+                    price: "R39.99 / Box",
+                    description: "A luminous, semi-dry treasure. Offering subtle notes of toasted almond and wildflower honey, with a perfectly firm finish. Excellent for baking.",
+                    image_url: "https://cleangreensimple.com/wp-content/uploads/guide-to-dried-dates.jpg"
+                },
+                {
+                    id: 3,
+                    name: "Golden Crunch",
+                    price: "R59.99 / Box",
+                    description: "A rare, exquisite treat. Harvested early for its unique, crunchy texture and a fresh, complex flavour reminiscent of spiced pear and aged butterscotch.",
+                    image_url: "https://img.lb.wbmdstatic.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/SEEDs/1800x1200-medjool-dates-are-there-health-benefits-seed.jpg?resize=750px:*&output-quality=75"
+                }
+
+            ],
             gift_boxes: [
                 {
                     id: 101,
@@ -39,18 +64,18 @@
                 },
                 {
                     id: 103,
-                    name: "The Grand Hamper",
-                    price: "R499.00 / Gift Box",
-                    description: "Our ultimate indulgence. Includes five date varieties, gold-plated serving tongs, and a personalized, hand-written note card. A truly unforgettable gift.",
-                    image_url: "https://www.shutterstock.com/image-photo/dates-gift-box-600nw-2313653131.webp"
+                    name: "The Celebration Crate",
+                    price: "R450.00 / Gift Box",
+                    description: "Our largest selection, featuring six types of premium dates, a bottle of artisanal date syrup, and personalized, hand-written calligraphy on the inner lid. Suitable for grand events.",
+                    image_url: "https://images.squarespace-cdn.com/content/v1/5e2b46781f3b2024b07f884f/1614264627915-F415V7EEO8M8X3W27Y2R/date_gift_box_dates.jpg?format=1000w"
                 }
             ],
             footer: {
                 shop: [
-                    { text: "Home", href: "index.html" },
                     { text: "Full Collection", href: "collection.html" },
                     { text: "Gifting Solutions", href: "gifting.html" }, 
-                    { text: "Wholesale Inquiry", href: "bulk.html" } 
+                    { text: "Our Story", href: "about.htm" }, // ADDED NEW LINK
+                    { text: "Wholesale Inquiry", href: "mailto:inquiry@kajoorsquare.co" } 
                 ],
                 support: [
                     { text: "FAQ", href: "#" },
@@ -58,8 +83,14 @@
                     { text: "Call", href:"tel:+27728226614"} 
                 ],
                 social: [
-                    { icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4l1 3 3-3h6a2 2 0 0 0 2-2z"></path></svg>', href: "https://wa.me/27728226614?text=I%20have%20an%20inquiry%20about%20your%20premium%20dates." },
-                    { icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>', href: "https://www.instagram.com/thekajoor_square_dates/" },
+                    { 
+                        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4l1 3 3-3h6a2 2 0 0 0 2-2z"></path></svg>', 
+                        href: "https://wa.me/27728226614?text=I%20have%20an%20inquiry%20about%20your%20premium%20dates%20and%20gifting." 
+                    },
+                    { 
+                        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>', 
+                        href: "https://www.instagram.com/thekajoor_square_dates/" 
+                    },
                     { icon: "", href: "#" } 
                 ]
             }
@@ -68,8 +99,7 @@
         // 🔑 EDITABLE CONTENT CONFIGURATION (END)
         // =======================================================
 
-
-        // Customizing Tailwind to include our brand colors and fonts
+        // Customizing Tailwind
         tailwind.config = {
             theme: {
                 extend: {
@@ -85,7 +115,7 @@
             }
         };
 
-        // --- Core Rendering Logic ---
+        // Function to dynamically insert content from the config object
         function renderContent() {
             // Helper function for rendering list links
             function renderListLinks(containerId, links) {
@@ -115,36 +145,45 @@
 
             // 2. Update Header Navigation Links (Desktop and Mobile)
             const navLinks = `
+                <a href="index.htm" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Home</a>
                 <a href="collection.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Collection</a>
-                <a href="gifting.html" onclick="closeMobileMenu()" class="text-date-gold font-bold transition duration-200">Gifting</a>
-                <a href="bulk.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Bulk & Wholesale</a>
-                <a href="index.html#contact" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Contact</a>
+                <a href="gifting.html" onclick="closeMobileMenu()" class="text-date-gold font-bold">Gifting</a>
+                <a href="about.htm" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Our Story</a>
             `;
             
-            document.getElementById('main-nav').innerHTML = navLinks;
-            document.getElementById('mobile-nav').innerHTML = navLinks;
+            const desktopNavContainer = document.getElementById('main-nav');
+            if (desktopNavContainer) {
+                desktopNavContainer.innerHTML = navLinks;
+            }
             
-            // 3. Dynamic Gift Box Rendering
+            const mobileNavContainer = document.getElementById('mobile-nav');
+            if (mobileNavContainer) {
+                mobileNavContainer.innerHTML = navLinks;
+            }
+
+            // 3. Dynamic Gift Box Grid Rendering
             const giftBoxGrid = document.getElementById('gift-box-grid'); 
             if (giftBoxGrid) {
                 giftBoxGrid.innerHTML = config.gift_boxes.map(box => {
                     return `
-                        <div id="gift-box-${box.id}" class="date-card bg-white rounded-xl overflow-hidden shadow-2xl shadow-date-black/10 transition duration-300 hover:shadow-date-gold/50 border-4 border-date-gold/0 hover:border-date-gold group">
+                        <!-- Gift Box Card -->
+                        <div id="gift-box-${box.id}" class="date-card bg-white rounded-xl overflow-hidden shadow-2xl border-2 border-date-gold/10 transition duration-300 hover:shadow-date-gold/50 hover:border-date-gold group">
                             <div class="overflow-hidden">
                                 <img 
                                     class="date-img w-full h-80 object-cover object-center" 
                                     src="${box.image_url}" 
                                     alt="${box.name} Gift Box"
-                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/1E1E1E/DAA520?text=Gift+Box+Image';"
+                                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/1E1E1E/DAA520?text=${box.name}';"
                                 >
                             </div>
                             <div class="p-8 text-left">
-                                <h3 class="product-name font-display text-2xl sm:text-3xl md:text-4xl font-extrabold text-date-black mb-2">${box.name}</h3>
+                                <h3 class="product-name font-display text-4xl font-extrabold text-date-black mb-2">${box.name}</h3>
                                 <p class="product-price text-date-gold text-2xl font-semibold mb-4">${box.price}</p>
-                                <p class="product-description text-gray-700 mb-6 leading-relaxed">${box.description}</p>
-                                <button class="w-full py-3 bg-date-gold text-white rounded-full font-semibold transition duration-300 transform group-hover:bg-date-black group-hover:scale-[1.02] shadow-lg">
-                                    Send a Gift
-                                </button>
+                                <p class="product-description text-gray-700 mb-6 leading-relaxed line-clamp-3">${box.description}</p>
+                                <!-- Call to Action for Gifting/Inquiry -->
+                                <a href="https://wa.me/27728226614?text=I%20am%20interested%20in%20The%20${box.name}%20Gift%20Box." target="_blank" class="w-full inline-block text-center py-3 bg-date-gold text-white rounded-full font-semibold transition duration-300 transform group-hover:bg-date-black group-hover:scale-[1.02] shadow-lg">
+                                    Inquire via WhatsApp
+                                </a>
                             </div>
                         </div>
                     `;
@@ -152,24 +191,35 @@
             }
 
 
-            // 4. Update Footer Content and Links
+            // 4. Update Static Footer Content
             document.getElementById('footer-brand-name').textContent = config.brand.name;
             document.getElementById('footer-established').textContent = `Distributers of the Finest Dates since ${config.brand.established_year}.`;
             
             const footerAddress = document.getElementById('footer-address');
-            footerAddress.innerHTML = `<a href="${config.brand.address.href}" target="_blank" class="hover:text-date-gold transition duration-200">${config.brand.address.text}</a>`;
+            if (typeof config.brand.address === 'object' && config.brand.address !== null && config.brand.address.href) {
+                footerAddress.innerHTML = `
+                    <a href="${config.brand.address.href}" target="_blank" class="hover:text-date-gold transition duration-200">
+                        ${config.brand.address.text}
+                    </a>
+                `;
+            } else if (config.brand.address.text) {
+                footerAddress.textContent = config.brand.address.text;
+            } else {
+                footerAddress.textContent = config.brand.address;
+            }
 
             document.getElementById('footer-copyright').textContent = `© 2025 ${config.brand.name} All Rights Reserved.`;
 
+            // 5. Update Footer Links
             renderListLinks('footer-shop-links', config.footer.shop);
             renderListLinks('footer-support-links', config.footer.support);
             renderSocialLinks('footer-social-links', config.footer.social);
         }
-
-        // === Mobile Menu Logic ===
+        
+        // --- Mobile Menu Logic ---
         function openMobileMenu() {
             document.getElementById('mobile-menu').classList.remove('hidden');
-            document.body.classList.add('overflow-hidden');
+            document.body.classList.add('overflow-hidden'); 
         }
 
         function closeMobileMenu() {
@@ -182,6 +232,8 @@
             document.getElementById('close-menu-button').onclick = closeMobileMenu;
         }
 
+
+        // Run the content rendering function and menu setup once the window loads
         window.onload = function() {
             renderContent();
             setupMobileMenu();
@@ -192,17 +244,21 @@
         /* Product Card Image Hover Effect */
         .date-card:hover .date-img {
             transform: scale(1.05);
-            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
         }
+
+        /* Base image style */
         .date-img {
             transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); 
             box-shadow: 0 10px 30px -5px rgba(218, 165, 32, 0.15); 
         }
-        /* Marquee CSS */
-        .marquee { animation: marquee 15s linear infinite; }
-        @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
+        
+        /* Utility for clamping text to a specific number of lines */
+        .line-clamp-3 {
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
         }
     </style>
 </head>
@@ -211,13 +267,14 @@
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-date-black/95 backdrop-blur-md">
         <div class="flex flex-col h-full items-center justify-center space-y-8">
-            <button id="close-menu-button" class="absolute top-6 right-6 text-date-gold hover:text-white transition">
+            <button id="close-menu-button" class="absolute top-6 right-6 text-date-gold hover:text-white transition" aria-label="Close Menu">
+                <!-- Close Icon (X) -->
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <nav id="mobile-nav" class="flex flex-col space-y-6 text-3xl font-display font-bold text-white text-center">
                 <!-- Mobile Links dynamically updated in JS -->
             </nav>
-            <a href="index.html" class="text-lg font-bold text-date-gold mt-10 hover:text-white transition" id="brand-logo-mobile">
+            <a href="#" class="text-lg font-bold text-date-gold mt-10 hover:text-white transition">
                 <span class="text-date-gold">${config.brand.gold_part}</span> ${config.brand.black_part}
             </a>
         </div>
@@ -227,7 +284,7 @@
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- Logo/Brand Name -->
-            <a href="index.html" class="text-3xl font-display font-bold text-date-black tracking-wider" id="brand-logo">
+            <a href="index.htm" class="text-3xl font-display font-bold text-date-black tracking-wider" id="brand-logo">
                 <!-- Content injected by JavaScript -->
             </a>
             
@@ -236,51 +293,63 @@
                 <!-- Links dynamically updated in JS -->
             </nav>
 
-            <button id="menu-button" class="md:hidden text-date-black p-2 rounded-lg hover:bg-date-black/10 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
+            <!-- Actions (Cart & Mobile Menu Button) -->
+            <div class="flex items-center space-x-4">
+                <!-- Cart Icon - Links to collection.html -->
+                <a href="collection.html" class="p-2 text-date-black hover:text-date-gold transition duration-200 relative" aria-label="Shopping Cart">
+                    <!-- Shopping Bag Icon SVG -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                </a>
+                
+                <!-- Mobile Menu Button (Hamburger) -->
+                <button id="menu-button" class="md:hidden text-date-black p-2 rounded-lg hover:bg-date-black/10 transition" aria-label="Open Menu">
+                    <!-- Hamburger Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
             
-            <div class="hidden md:block w-12"></div>
         </div>
     </header>
 
     <main>
-        <!-- Gift Box Section -->
-        <section class="pt-16 pb-20 md:pt-24 md:pb-32 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 bg-white">
-            <div class="text-center mb-16">
-                 <p class="text-xl font-semibold uppercase tracking-widest text-date-gold mb-3">Presents of Distinction</p>
-                <h1 class="font-display text-5xl sm:text-6xl font-bold text-date-black mb-4">
-                    The Art of <span class="text-date-gold">Gifting</span>
+        <!-- Gifting Hero/Header -->
+        <section class="bg-date-black/5 py-16 md:py-24 border-b-4 border-date-gold/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <h1 class="font-display text-5xl sm:text-7xl font-extrabold text-date-black mb-4">
+                    Exceptional <span class="text-date-gold">Gifting</span>
                 </h1>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Choose from our collection of bespoke gift boxes, designed for corporate clients, holidays, and personal milestones.
+                <p class="text-xl text-gray-700 max-w-3xl mx-auto">
+                    The ultimate statement of refined taste. Choose from our curated gift boxes or create a custom order for corporate and private events.
                 </p>
-            </div>
-
-            <!-- Gift Box Grid - 2 columns -->
-            <div id="gift-box-grid" class="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-12">
-                <!-- Gift Box content dynamically injected by JS -->
-            </div>
-            
-            <div class="text-center mt-20">
-                <h2 class="font-display text-3xl font-bold text-date-black mb-4">Custom Gifting</h2>
-                <p class="text-lg text-gray-600 mb-6">
-                    Need something perfectly tailored? Contact us to discuss personalized packaging and large orders.
-                </p>
-                <a href="index.html#contact" class="inline-block px-10 py-3 bg-date-gold text-white text-lg font-bold rounded-full shadow-lg hover:bg-date-black transition duration-300 transform hover:scale-105">
-                    Start a Custom Order
-                </a>
             </div>
         </section>
 
-        <!-- Animated Feature Bar -->
-        <div class="bg-date-gold text-date-black py-4 overflow-hidden border-t-4 border-b-4 border-date-black">
-            <div class="marquee whitespace-nowrap">
-                <p class="inline-block text-lg md:text-2xl font-bold uppercase tracking-widest">
-                    &star; PERFECT FOR CORPORATE &star; PERSONALISED OPTIONS &star; LUXURY PACKAGING &star; PERFECT FOR CORPORATE &star; PERSONALISED OPTIONS &star; LUXURY PACKAGING &star;
-                </p>
+        <!-- Gift Box Grid Section -->
+        <section class="py-20 md:py-32">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                
+                <h2 class="font-display text-4xl font-bold text-center mb-12">Curated Gift Boxes</h2>
+
+                <!-- Gift Box Grid Container: Responsive columns -->
+                <div id="gift-box-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+                    <!-- Gift Box cards will be injected here by JavaScript -->
+                </div>
+                
+                <!-- Custom Gifting Callout -->
+                <div class="mt-20 text-center bg-date-gold/10 p-10 rounded-xl border border-date-gold/30">
+                    <h3 class="font-display text-3xl font-bold text-date-black mb-4">Need a Custom Gifting Solution?</h3>
+                    <p class="text-lg text-gray-800 mb-6">For large orders, corporate branding, or bespoke box creation, contact our gifting specialist directly.</p>
+                    <a href="https://wa.me/27728226614?text=I%20would%20like%20to%20discuss%20a%20Custom%20Gifting%20Order." target="_blank" class="inline-block px-10 py-4 bg-date-black text-white text-lg font-bold rounded-full shadow-xl hover:bg-date-gold transition duration-300 transform hover:scale-105">
+                        Start Custom Order Inquiry
+                    </a>
+                </div>
             </div>
-        </div>
+        </section>
+
     </main>
 
     <!-- Footer -->

@@ -101,13 +101,13 @@
                 shop: [
                     // Updated to link to collection.html
                     { text: "Full Collection", href: "collection.html" },
-                    // UPDATED: Link Gifting Solutions to gifting.html
                     { text: "Gifting Solutions", href: "gifting.html" }, 
-                    { text: "Wholesale Inquiry", href: "bulk.html" } 
+                    { text: "Wholesale Inquiry", href: "bulk.html" },
+                    { text: "Cart", href: "cart.html" },
                 ],
                 support: [
-                    { text: "FAQ", href: "#" },
-                    { text: "Shipping & Returns", href: "#" },
+                    { text: " ", href: "#" },
+                    { text: " ", href: "#" },
                     { text: "Call", href:"tel:+27728226614"} 
                 ],
                 social: [
@@ -392,7 +392,7 @@
             }
 
 
-            document.getElementById('footer-copyright').textContent = `© 2025 ${config.brand.name} All Rights Reserved.`;
+            document.getElementById('footer-copyright').textContent = `© 2025 ${config.brand.name} All Rights Reserved.Created by: M.Y.Desai.Works`;
 
             // 10. Update Footer Links
             renderListLinks('footer-shop-links', config.footer.shop);

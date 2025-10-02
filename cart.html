@@ -128,14 +128,14 @@
         /**
          * Generates the pre-filled WhatsApp message with order details.
          */
-        function generateWhatsAppMessage(cart, subtotal, shipping, total, name, address, date) {
-            let message = "السَّلَامُ عَلَيْكُمْ (Peace be upon you). I would like to place an order from THE KAJOOR SQUARE CO. Please process my order as follows:\n\n";
+        function generateWhatsAppMessage(cart, subtotal, total, name, address, date) {
+            let message = "السَّلَامُ عَلَيْكُمْ . I would like to place an order from THE KAJOOR SQUARE CO. Please process my order as follows:\n\n";
 
             // Add customer details
             message += `CUSTOMER DETAILS:\n`;
             message += `> Name: ${name || 'N/A'}\n`;
             message += `> Address: ${address || 'N/A'}\n`;
-            message += `> Required Date: ${date || 'ASAP'}\n\n`;
+            message += `> Required Date needed by: ${date || 'ASAP'}\n\n`;
 
 
             message += `ORDER ITEMS:\n`;
@@ -147,9 +147,9 @@
             message += `\n---\n`;
             message += `FINANCIAL SUMMARY:\n`;
             message += `Subtotal: R${subtotal.toFixed(2)}\n`;
-            message += `Shipping: ${shipping > 0 ? `R${shipping.toFixed(2)}` : 'FREE'}\n`;
+            // Shipping removed from the message
             message += `TOTAL ORDER: R${total.toFixed(2)}\n`;
-            message += `\nKindly confirm availability and proceed with the payment details. Jazak Allah Khair.`;
+            message += `\nKindly confirm availability,shipment and proceed with the payment details. Jazak Allah Khair.`;
             
             return encodeURIComponent(message);
         }
@@ -192,12 +192,11 @@
             // This number should be the seller's business WhatsApp number
             const targetNumber = '27728226614'; 
             
-            // Pass new data to message generator
+            // Pass new data to message generator (Note: Shipping is still passed but ignored in generateWhatsAppMessage)
             const encodedMessage = generateWhatsAppMessage(
                 cart, 
                 subtotal, 
-                shipping, 
-                total, 
+                total, // Note: passing total here which is subtotal in this context
                 customerName, 
                 deliveryAddress, 
                 deliveryDate
@@ -291,7 +290,7 @@
 
             // --- Calculate Summary ---
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-            const shipping = subtotal > 150 ? 0.00 : 35.00; // Mock: Free shipping over R150
+            const shipping = 0.00; // Shipping is now explicitly zero
             const total = subtotal + shipping;
             
             // --- Render Summary and WhatsApp Section ---
@@ -305,10 +304,9 @@
                             <span class="text-lg">Subtotal:</span>
                             <span class="font-semibold text-date-gold">R${subtotal.toFixed(2)}</span>
                         </div>
-                        <div class="flex justify-between">
-                            <span class="text-lg">Shipping:</span>
-                            <span class="font-semibold">${shipping > 0 ? `R${shipping.toFixed(2)}` : 'FREE'}</span>
-                        </div>
+                        
+                        <!-- Shipping Line Removed -->
+                        
                         <div class="flex justify-between border-t border-gray-600 pt-4">
                             <span class="text-xl font-bold">Order Total:</span>
                             <span class="text-2xl font-bold text-date-gold">R${total.toFixed(2)}</span>
@@ -357,7 +355,7 @@
                         placeholder="Required Delivery Date" 
                         class="w-full p-3 mb-3 border-2 border-gray-300 rounded-lg focus:ring-date-gold focus:border-date-gold text-date-black placeholder-gray-500 transition duration-300"
                     />
-
+                    
                     <!-- Optional Phone Number -->
                     <input 
                         type="tel" 

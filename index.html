@@ -34,34 +34,34 @@
                 {
                     id: 1,
                     name: "Majestic Medjool",
-                    price: "R49.99 / Box",
+                    unit_price: 49.99,
                     description: "The crown jewel of dates. Possessing a deep, intense sweetness, velvety texture, and lingering notes of dark caramel and cocoa.",
                     image_url: "https://www.secretosdelsur.com/wp-content/uploads/2024/05/dates.jpg"
                 },
                 {
                     id: 2,
                     name: "Amber Delight",
-                    price: "R39.99 / Box",
+                    unit_price: 39.99,
                     description: "A luminous, semi-dry treasure. Offering subtle notes of toasted almond and wildflower honey, with a perfectly firm finish.",
                     image_url: "https://cleangreensimple.com/wp-content/uploads/guide-to-dried-dates.jpg"
                 },
                 {
                     id: 3,
                     name: "Golden Crunch",
-                    price: "R59.99 / Box",
+                    unit_price: 59.99,
                     description: "A rare, exquisite treat. Harvested early for its unique, texture and a fresh, complex flavour reminiscent of spiced pear and aged butterscotch.",
                     image_url: "https://img.lb.wbmdstatic.com/vim/live/webmd/consumer_assets/site_images/article_thumbnails/SEEDs/1800x1200-medjool-dates-are-there-health-benefits-seed.jpg?resize=750px:*&output-quality=75"
                 },
                 {
                     id: 4,
                     name: "Royal Khalas",
-                    price: "R35.00 / Box",
+                    unit_price: 35.00,
                     description: "A popular choice known for its tender texture and mild, butterscotch flavor. A perfect daily indulgence.",
                     image_url: "https://theveganatlas.com/wp-content/uploads/2022/03/Dried-dates-in-a-wooden-bowl.jpg"
                 }
 
             ],
-            // === NEW: GIFT BOX LISTINGS ===
+            // NOTE: Gift box prices use the original string format and are not intended for cart calculation here.
             gift_boxes: [
                 {
                     id: 101,
@@ -146,6 +146,72 @@
             }
         };
 
+        // --- CART HELPER FUNCTIONS ---
+        const STORAGE_KEY = 'kajoor_cart';
+        
+        function getCart() {
+            try {
+                const cartString = localStorage.getItem(STORAGE_KEY);
+                return cartString ? JSON.parse(cartString) : [];
+            } catch (e) {
+                console.error("Could not load cart from storage:", e);
+                return [];
+            }
+        }
+
+        function saveCart(cart) {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+        }
+
+        function findProductById(id) {
+            const product = config.products.find(p => p.id === id);
+            if (!product) return null;
+            
+            // Format price string and ensure it has necessary properties
+            return {
+                id: product.id,
+                name: product.name,
+                price: product.unit_price, // Use numerical price for cart logic
+                image: product.image_url,
+                description: product.description,
+            };
+        }
+
+        /**
+         * Adds an item to the local storage cart and redirects to the cart page.
+         */
+        function addToCart(productId, quantity = 1) {
+            let cart = getCart();
+            const productData = findProductById(productId);
+
+            if (!productData) {
+                console.error("Product not found:", productId);
+                return;
+            }
+
+            let itemIndex = cart.findIndex(item => item.id === productId);
+
+            if (itemIndex > -1) {
+                // Item exists, increase quantity
+                cart[itemIndex].quantity += quantity;
+            } else {
+                // Item is new, add it
+                cart.push({
+                    id: productId,
+                    name: productData.name,
+                    price: productData.price,
+                    image: productData.image,
+                    quantity: quantity
+                });
+            }
+            
+            saveCart(cart);
+            // Redirect to the new cart page
+            window.location.href = 'cart.html';
+        }
+
+        // --- RENDER CONTENT FUNCTIONS ---
+
         // Function to dynamically insert content from the config object
         function renderContent() {
             // Helper function for rendering list links
@@ -223,13 +289,14 @@
                             </div>
                             <div class="p-6 text-center">
                                 <h3 class="product-name font-display text-3xl font-bold text-date-black mb-2">${product.name}</h3>
-                                <p class="product-price text-date-gold text-xl font-semibold mb-4">${product.price}</p>
+                                <p class="product-price text-date-gold text-xl font-semibold mb-4">R${product.unit_price.toFixed(2)} / Box</p>
                                 <!-- Line clamp ensures descriptions don't break the slider layout -->
                                 <p class="product-description text-gray-600 mb-6 text-sm line-clamp-3">${product.description}</p>
-                                <!-- Button links to the main collection page -->
-                                <a href="collection.html" class="w-full inline-block py-3 bg-date-black text-white rounded-full font-semibold transition duration-300 transform group-hover:bg-date-gold group-hover:scale-[1.02]">
-                                    View Details
-                                </a>
+                                
+                                <!-- UPDATED: Button now calls addToCart and redirects to cart.html -->
+                                <button onclick="addToCart(${product.id}, 1)" class="w-full inline-block py-3 bg-date-black text-white rounded-full font-semibold transition duration-300 transform group-hover:bg-date-gold group-hover:scale-[1.02] active:scale-95">
+                                    Add to Cart
+                                </button>
                             </div>
                         </div>
                     `;
@@ -447,7 +514,7 @@
     <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-sm shadow-lg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
             <!-- Logo/Brand Name -->
-            <a href="#" class="text-3xl font-display font-bold text-date-black tracking-wider" id="brand-logo">
+            <a href="index.html" class="text-3xl font-display font-bold text-date-black tracking-wider" id="brand-logo">
                 <!-- Content injected by JavaScript -->
             </a>
             
@@ -458,15 +525,15 @@
 
             <!-- Actions (Cart & Mobile Menu Button) -->
             <div class="flex items-center space-x-4">
-                <!-- Cart Icon - Links to collection.html -->
-                <a href="collection.html" class="p-2 text-date-black hover:text-date-gold transition duration-200 relative" aria-label="Shopping Cart">
+                <!-- UPDATED: Cart Icon - Links to cart.html -->
+                <a href="cart.html" class="p-2 text-date-black hover:text-date-gold transition duration-200 relative" aria-label="Shopping Cart">
                     <!-- Shopping Bag Icon SVG -->
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
                         <line x1="3" y1="6" x2="21" y2="6"></line>
                         <path d="M16 10a4 4 0 0 1-8 0"></path>
                     </svg>
-                </a
+                </a>
                 
                 <!-- Mobile Menu Button (Hamburger) -->
                 <button id="menu-button" class="md:hidden text-date-black p-2 rounded-lg hover:bg-date-black/10 transition" aria-label="Open Menu">
@@ -620,7 +687,7 @@
                 <!-- Brand Info -->
                 <div>
                     <h3 id="footer-brand-name" class="font-display text-2xl font-bold text-date-gold mb-4"><!-- Content injected by JavaScript --></h3>
-                    <p id="footer-established" class="text-gray-400 text-sm mb-2">Distributors of the Finest Dates since 2012.</p>
+                    <p id="footer-established" class="text-gray-400 text-sm mb-2">Distributers of the Finest Dates since ${config.brand.established_year}.</p>
                     <p id="footer-address" class="text-gray-400 text-sm"><!-- Content injected by JavaScript --></p>
                 </div>
 

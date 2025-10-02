@@ -23,14 +23,20 @@
                 }
             },
             bulk: {
-                title: "Partnerships in Excellence",
-                subtitle: "Unlock exclusive wholesale pricing for large volume orders. Ideal for retailers, caterers, and corporate distributors.",
-                input_placeholder: "Your Company Name or Contact Name",
-                button_text: "Start Wholesale Inquiry (via WhatsApp)"
+                // CHANGED: Updated title to reflect user request
+                title: "Bulk Inquiries",
+                subtitle: "Unlock exclusive wholesale pricing for large volume orders. Ideal for retailers, caterers, and corporate gifting.",
+                form_fields: [
+                    { id: "business-name", type: "text", label: "Business/Organization Name (Required)", placeholder: "e.g., The Date Delight Cafe" },
+                    { id: "contact-person", type: "text", label: "Contact Person Full Name (Required)", placeholder: "e.g., Jane Doe" },
+                    { id: "email", type: "email", label: "Email Address (Required)", placeholder: "e.g., jane@example.com" },
+                    { id: "phone", type: "tel", label: "Phone Number (Required)", placeholder: "e.g., +27 12 345 6789" },
+                    { id: "quantity-needed", type: "number", label: "Estimated Annual Quantity Needed (in Kg or boxes)", placeholder: "e.g., 500 Kg", min: "50" }
+                ],
+                details_field: { id: "details", label: "Specific Product & Request Details", placeholder: "e.g., Interested in 100 boxes of Majestic Medjool per month. Please send the wholesale catalogue." }
             },
             footer: {
                 shop: [
-                    { text: "Home", href: "index.html" },
                     { text: "Full Collection", href: "collection.html" },
                     { text: "Gifting Solutions", href: "gifting.html" }, 
                     { text: "Wholesale Inquiry", href: "bulk.html" } 
@@ -41,16 +47,18 @@
                     { text: "Call", href:"tel:+27728226614"} 
                 ],
                 social: [
-                    { icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4l1 3 3-3h6a2 2 0 0 0 2-2z"></path></svg>', href: "https://wa.me/27728226614?text=I%20have%20an%20inquiry%20about%20your%20premium%20dates." },
-                    { icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>', href: "https://www.instagram.com/thekajoor_square_dates/" },
+                    { 
+                        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4l1 3 3-3h6a2 2 0 0 0 2-2z"></path></svg>', 
+                        href: "https://wa.me/27728226614?text=I%20have%20an%20inquiry%20about%20your%20premium%20dates." 
+                    },
+                    { 
+                        icon: '<svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>', 
+                        href: "https://www.instagram.com/thekajoor_square_dates/" 
+                    },
                     { icon: "", href: "#" } 
                 ]
             }
         };
-        // =======================================================
-        // 🔑 EDITABLE CONTENT CONFIGURATION (END)
-        // =======================================================
-
 
         // Customizing Tailwind to include our brand colors and fonts
         tailwind.config = {
@@ -68,89 +76,174 @@
             }
         };
 
-        // --- Core Rendering Logic ---
-        function renderContent() {
-            // Helper function for rendering list links
-            function renderListLinks(containerId, links) {
-                const container = document.getElementById(containerId);
-                if (!container) return;
-                container.innerHTML = links.map(link => 
-                    `<li><a href="${link.href}" class="hover:text-date-gold transition">${link.text}</a></li>`
-                ).join('');
-            }
+        // =======================================================
+        // ⚙️ FORM SUBMISSION LOGIC (MOCK)
+        // =======================================================
+        window.submitInquiry = function(event) {
+            event.preventDefault(); 
+            const requiredFields = ["business-name", "contact-person", "email", "phone"];
+            let allValid = true;
 
-            // Helper function for rendering social links
-            function renderSocialLinks(containerId, links) {
-                const container = document.getElementById(containerId);
-                if (!container) return;
-                container.innerHTML = links.map(link => 
-                    `<a href="${link.href}" target="_blank" class="text-date-gold hover:text-white transition duration-300 p-2 rounded-full hover:bg-date-gold/20 flex items-center justify-center">
-                        ${link.icon}
-                    </a>`
-                ).join('');
+            requiredFields.forEach(id => {
+                const input = document.getElementById(id);
+                if (!input.value.trim()) {
+                    input.classList.add('border-red-500');
+                    allValid = false;
+                } else {
+                    input.classList.remove('border-red-500');
+                }
+            });
+
+            if (allValid) {
+                // 1. Collect form data
+                const data = {};
+                config.bulk.form_fields.forEach(field => {
+                    data[field.id] = document.getElementById(field.id).value;
+                });
+                data[config.bulk.details_field.id] = document.getElementById(config.bulk.details_field.id).value;
+                
+                // 2. Construct the pre-filled WhatsApp message body
+                let messageBody = `*New Bulk Inquiry from The Kajoor Square Website*\n\n`;
+                messageBody += `*Business Name:* ${data["business-name"]}\n`;
+                messageBody += `*Contact Person:* ${data["contact-person"]}\n`;
+                messageBody += `*Email:* ${data["email"]}\n`;
+                messageBody += `*Phone:* ${data["phone"]}\n`;
+                messageBody += `*Estimated Quantity:* ${data["quantity-needed"]}\n`;
+                messageBody += `*Details:* ${data["details"]}\n`;
+
+                const phoneNumber = "27728226614";
+                const encodedMessage = encodeURIComponent(messageBody);
+                const whatsappLink = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+                
+                // 3. Display success message with WhatsApp button
+                const formContainer = document.getElementById('inquiry-form-container');
+                formContainer.innerHTML = `
+                    <div class="p-8 text-center bg-green-50 rounded-xl border-2 border-green-500 shadow-2xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-16 h-16 mx-auto text-green-600 mb-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                        <h2 class="font-display text-2xl font-bold text-green-700 mb-2">Inquiry Submitted!</h2>
+                        <p class="text-green-600 mb-6">
+                            Thank you, ${data["contact-person"]}. Your wholesale request has been logged. 
+                            For the **fastest response** and to open a direct discussion, click the button below to send your details instantly via WhatsApp.
+                        </p>
+                        <a href="${whatsappLink}" target="_blank" class="inline-flex items-center justify-center py-3 px-6 bg-green-500 text-white text-lg font-bold rounded-full shadow-lg hover:bg-green-600 transition duration-300 transform active:scale-95">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2c-5.52 0-9.98 4.48-9.98 9.98 0 1.94.55 3.76 1.5 5.33L2 22l5.5-1.45c1.55.85 3.3.93 5.04.57 4.54-.93 7.74-5.1 6.81-9.64C18.06 4.47 15.34 2 12.04 2zm3.17 12.92c-.22.62-.84 1.14-1.18 1.25-.33.11-.73.17-1.12-.03-.4-.2-2.3-1.13-2.65-1.26-.35-.13-.6-.08-.85.45-.25.53-.78 1.48-1.02 1.73-.25.24-.49.27-.92.05-.43-.22-1.63-.6-3.11-1.92-1.15-1.02-1.94-2.3-2.17-2.75-.23-.45-.03-.7.17-.91.18-.18.4-.4.6-.61.16-.16.35-.41.49-.6.14-.19.07-.35-.01-.49-.07-.13-.57-1.37-.78-1.85-.2-.48-.4-.41-.7-.41-.3 0-.64.09-.98.09-.34 0-.68.1-.98.39-.3.29-1.13 1.05-1.13 2.53 0 1.48 1.15 2.92 1.3 3.12.15.2.29.35.48.55 2.2 2.3 4.13 3.73 5.8 4.29 1.67.56 2.05.45 2.5.38.45-.07 1.46-.6 1.66-.88.2-.28.2-.52.14-.62-.07-.1-.26-.15-.55-.29z"/></svg>
+                            Send Details via WhatsApp
+                        </a>
+                    </div>
+                `;
             }
+        }
+        
+        /**
+         * Renders the dynamic form fields.
+         */
+        function renderFormFields() {
+            const formContainer = document.getElementById('inquiry-form');
+            if (!formContainer) return;
             
-            // 1. Update Header Logo
+            let html = config.bulk.form_fields.map(field => `
+                <div class="mb-4">
+                    <label for="${field.id}" class="block text-sm font-medium text-gray-700 mb-1">${field.label}</label>
+                    <input 
+                        type="${field.type}" 
+                        id="${field.id}" 
+                        name="${field.id}"
+                        placeholder="${field.placeholder}" 
+                        ${field.type === 'number' ? `min="${field.min || '0'}"` : ''}
+                        class="mt-1 w-full p-3 border-2 border-gray-300 rounded-lg focus:ring-date-gold focus:border-date-gold transition duration-300"
+                        ${field.label.includes('(Required)') ? 'required' : ''}
+                    >
+                </div>
+            `).join('');
+
+            // Add the textarea (details field)
+            html += `
+                <div class="mb-6">
+                    <label for="${config.bulk.details_field.id}" class="block text-sm font-medium text-gray-700 mb-1">${config.bulk.details_field.label}</label>
+                    <textarea 
+                        id="${config.bulk.details_field.id}" 
+                        name="${config.bulk.details_field.id}"
+                        rows="4" 
+                        placeholder="${config.bulk.details_field.placeholder}" 
+                        class="mt-1 w-full p-3 border-2 border-gray-300 rounded-lg focus:ring-date-gold focus:border-date-gold transition duration-300"
+                    ></textarea>
+                </div>
+            `;
+            
+            // Add the submit button
+            html += `
+                <button type="submit" class="w-full py-4 bg-date-gold text-date-black text-xl font-bold rounded-full shadow-lg hover:bg-date-black hover:text-white transition duration-300 transform active:scale-95">
+                    Submit Wholesale Inquiry
+                </button>
+            `;
+            
+            formContainer.innerHTML = html;
+        }
+
+        // =======================================================
+        // ⚙️ INITIALIZATION & SHARED HEADER/FOOTER FUNCTIONS
+        // =======================================================
+
+        // Helper functions for rendering header/footer
+        function renderListLinks(containerId, links) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = links.map(link => 
+                `<li><a href="${link.href}" class="hover:text-date-gold transition">${link.text}</a></li>`
+            ).join('');
+        }
+
+        function renderSocialLinks(containerId, links) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+            container.innerHTML = links.map(link => 
+                `<a href="${link.href}" target="_blank" class="text-date-gold hover:text-white transition duration-300 p-2 rounded-full hover:bg-date-gold/20 flex items-center justify-center">
+                    ${link.icon}
+                </a>`
+            ).join('');
+        }
+        
+        function renderContent() {
+            // Header Logo
             const brandLogo = document.getElementById('brand-logo');
             if (brandLogo) {
                 brandLogo.innerHTML = `<span class="text-date-gold">${config.brand.gold_part}</span> ${config.brand.black_part}`;
             }
 
-            // 2. Update Header Navigation Links (Desktop and Mobile)
+            // Navigation Links (Updated for consistency)
             const navLinks = `
+                <a href="index.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Home</a>
                 <a href="collection.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Collection</a>
                 <a href="gifting.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Gifting</a>
-                <a href="bulk.html" onclick="closeMobileMenu()" class="text-date-gold font-bold transition duration-200">Bulk & Wholesale</a>
-                <a href="index.html#contact" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Contact</a>
+                <a href="about.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Our Story</a>
+                <a href="bulk.html" onclick="closeMobileMenu()" class="text-date-gold font-bold transition duration-200">Wholesale</a>
+                <a href="cart.html" onclick="closeMobileMenu()" class="text-date-black hover:text-date-gold transition duration-200">Cart</a>
             `;
             
             document.getElementById('main-nav').innerHTML = navLinks;
             document.getElementById('mobile-nav').innerHTML = navLinks;
-            
-            // 3. Update Bulk Section
-            document.getElementById('bulk-title').textContent = config.bulk.title;
-            document.getElementById('bulk-subtitle').textContent = config.bulk.subtitle;
-            document.getElementById('bulk-input').placeholder = config.bulk.input_placeholder;
-            document.getElementById('bulk-button').textContent = config.bulk.button_text;
 
-            // 4. WhatsApp Integration Logic 
-            const bulkButton = document.getElementById('bulk-button');
-            const bulkInput = document.getElementById('bulk-input');
-
-            bulkButton.onclick = function(e) {
-                e.preventDefault(); 
-                const contactInfo = bulkInput.value.trim();
-                
-                // Example pre-filled message (WhatsApp requires message to be URL-encoded)
-                const prefilledMessage = encodeURIComponent(`Wholesale Inquiry from ${contactInfo || 'an interested party'}. I would like to discuss bulk pricing and distribution.`);
-                
-                if (contactInfo.length > 2) { 
-                    const whatsappLink = `https://wa.me/27728226614?text=${prefilledMessage}`; // Hardcoded WhatsApp number
-                    window.open(whatsappLink, '_blank');
-                } else {
-                    bulkInput.value = ''; 
-                    bulkInput.placeholder = "Please enter your name or company name";
-                    bulkInput.classList.add('border-red-500', 'animate-pulse');
-                    
-                    setTimeout(() => {
-                        bulkInput.placeholder = config.bulk.input_placeholder;
-                        bulkInput.classList.remove('border-red-500', 'animate-pulse');
-                    }, 3000);
-                }
-            };
-
-            // 5. Update Footer Content and Links
+            // Footer Content
             document.getElementById('footer-brand-name').textContent = config.brand.name;
             document.getElementById('footer-established').textContent = `Distributers of the Finest Dates since ${config.brand.established_year}.`;
             
             const footerAddress = document.getElementById('footer-address');
-            footerAddress.innerHTML = `<a href="${config.brand.address.href}" target="_blank" class="hover:text-date-gold transition duration-200">${config.brand.address.text}</a>`;
+            if (footerAddress) {
+                 footerAddress.innerHTML = `
+                    <a href="${config.brand.address.href}" target="_blank" class="hover:text-date-gold transition duration-200">
+                        ${config.brand.address.text}
+                    </a>
+                `;
+            }
 
             document.getElementById('footer-copyright').textContent = `© 2025 ${config.brand.name} All Rights Reserved.`;
 
             renderListLinks('footer-shop-links', config.footer.shop);
             renderListLinks('footer-support-links', config.footer.support);
             renderSocialLinks('footer-social-links', config.footer.social);
+
+            // Render form fields
+            renderFormFields();
         }
 
         // === Mobile Menu Logic ===
@@ -167,6 +260,11 @@
         function setupMobileMenu() {
             document.getElementById('menu-button').onclick = openMobileMenu;
             document.getElementById('close-menu-button').onclick = closeMobileMenu;
+            // Attach form submit handler
+            const form = document.getElementById('inquiry-form');
+            if (form) {
+                form.onsubmit = submitInquiry;
+            }
         }
 
         window.onload = function() {
@@ -176,28 +274,24 @@
 
     </script>
     <style>
-        /* Marquee CSS */
-        .marquee { animation: marquee 15s linear infinite; }
-        @keyframes marquee {
-            0% { transform: translate3d(0, 0, 0); }
-            100% { transform: translate3d(-50%, 0, 0); }
-        }
+        /* Custom styles for gold/black theme */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #f1f1f1; }
+        ::-webkit-scrollbar-thumb { background: #DAA520; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #a8860c; }
     </style>
 </head>
-<body class="bg-white text-date-black font-sans antialiased">
+<body class="bg-date-black/5 text-date-black font-sans antialiased min-h-screen flex flex-col">
 
     <!-- Mobile Menu Overlay -->
     <div id="mobile-menu" class="hidden fixed inset-0 z-50 bg-date-black/95 backdrop-blur-md">
         <div class="flex flex-col h-full items-center justify-center space-y-8">
-            <button id="close-menu-button" class="absolute top-6 right-6 text-date-gold hover:text-white transition">
+            <button id="close-menu-button" class="absolute top-6 right-6 text-date-gold hover:text-white transition" aria-label="Close Menu">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
             </button>
             <nav id="mobile-nav" class="flex flex-col space-y-6 text-3xl font-display font-bold text-white text-center">
-                <!-- Mobile Links dynamically updated in JS -->
+                <!-- Mobile Links dynamically updated in JS renderContent() -->
             </nav>
-            <a href="index.html" class="text-lg font-bold text-date-gold mt-10 hover:text-white transition" id="brand-logo-mobile">
-                <span class="text-date-gold">${config.brand.gold_part}</span> ${config.brand.black_part}
-            </a>
         </div>
     </div>
     
@@ -211,69 +305,52 @@
             
             <!-- Desktop Navigation -->
             <nav id="main-nav" class="hidden md:flex space-x-8 text-lg font-medium">
-                <!-- Links dynamically updated in JS -->
+                <!-- Links dynamically updated in JS renderContent() -->
             </nav>
 
-            <button id="menu-button" class="md:hidden text-date-black p-2 rounded-lg hover:bg-date-black/10 transition">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-            </button>
+            <!-- Actions (Cart & Mobile Menu Button) -->
+            <div class="flex items-center space-x-4">
+                <!-- Cart Icon -->
+                <a href="cart.html" class="p-2 text-date-gold transition duration-200 relative" aria-label="Shopping Cart">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                        <line x1="3" y1="6" x2="21" y2="6"></line>
+                        <path d="M16 10a4 4 0 0 1-8 0"></path>
+                    </svg>
+                </a>
+                
+                <!-- Mobile Menu Button (Hamburger) -->
+                <button id="menu-button" class="md:hidden text-date-black p-2 rounded-lg hover:bg-date-black/10 transition" aria-label="Open Menu">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                </button>
+            </div>
             
-            <div class="hidden md:block w-12"></div>
         </div>
     </header>
 
-    <main>
-        <!-- Bulk Inquiry Section -->
-        <section class="relative pt-16 pb-20 md:pt-24 md:pb-32 h-[80vh] flex items-center justify-center bg-date-black/5">
-            <div class="max-w-xl mx-auto px-4 sm:px-6 lg:px-8 text-center bg-white p-8 rounded-xl shadow-2xl border-4 border-date-gold/50">
-                <h1 id="bulk-title" class="font-display text-4xl sm:text-5xl font-bold text-date-black mb-4">
-                    <!-- Content injected by JavaScript -->
+    <main class="flex-grow py-12 md:py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h1 class="font-display text-5xl font-extrabold text-date-black mb-4">
+                    <!-- Updated heading now reads "Bulk Inquiries" from config.bulk.title -->
+                    ${config.bulk.title} 
                 </h1>
-                <p id="bulk-subtitle" class="text-xl text-gray-600 mb-8">
-                    <!-- Content injected by JavaScript -->
+                <p class="text-xl text-gray-600">
+                    ${config.bulk.subtitle}
                 </p>
-                
-                <img 
-                    src="https://placehold.co/600x200/DAA520/1E1E1E?text=Large+Volume+Bulk+Pricing" 
-                    alt="Bulk ordering placeholder image" 
-                    class="rounded-lg mb-8 shadow-xl"
-                />
+            </div>
 
-                <p class="text-lg font-semibold text-date-black mb-4">
-                    Please provide your contact information to initiate an exclusive discussion:
-                </p>
-
-                <form class="flex flex-col gap-4">
-                    <input 
-                        type="text" 
-                        id="bulk-input"
-                        placeholder="" 
-                        class="p-4 border-2 border-date-gold rounded-xl focus:ring-date-gold focus:border-date-gold text-date-black placeholder-gray-500 shadow-inner transition duration-300 w-full"
-                    />
-                    <button 
-                        id="bulk-button" 
-                        type="submit" 
-                        class="flex items-center justify-center gap-2 p-4 bg-date-gold text-white font-bold rounded-xl shadow-xl shadow-date-gold/50 transition duration-300 hover:bg-date-black transform hover:scale-[1.02] active:scale-95 w-full"
-                    >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15V9a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h4l1 3 3-3h6a2 2 0 0 0 2-2z"></path></svg>
-                        <!-- Content injected by JavaScript -->
-                    </button>
+            <div id="inquiry-form-container" class="bg-white p-8 md:p-12 rounded-xl shadow-2xl border-t-8 border-date-gold/70">
+                <form id="inquiry-form" onsubmit="submitInquiry(event)">
+                    <!-- Form fields dynamically generated by JavaScript -->
                 </form>
             </div>
-        </section>
 
-        <!-- Animated Feature Bar -->
-        <div class="bg-date-gold text-date-black py-4 overflow-hidden border-t-4 border-b-4 border-date-black">
-            <div class="marquee whitespace-nowrap">
-                <p class="inline-block text-lg md:text-2xl font-bold uppercase tracking-widest">
-                    &star; CUSTOM LOGISTICS &star; VOLUME DISCOUNTS &star; LONG-TERM PARTNERSHIPS &star; CUSTOM LOGISTICS &star; VOLUME DISCOUNTS &star; LONG-TERM PARTNERSHIPS &star;
-                </p>
-            </div>
         </div>
     </main>
 
     <!-- Footer -->
-    <footer class="bg-date-black text-white py-12 border-t-4 border-date-gold">
+    <footer class="bg-date-black text-white py-12 mt-auto border-t-4 border-date-gold">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
                 
